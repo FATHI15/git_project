@@ -1,0 +1,8 @@
+﻿Grossory shop 
+
+progress:
+
+●Read the  names 
+●sort the numbers
+●Get the names of stock
+

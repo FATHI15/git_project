@@ -5,7 +5,11 @@ def main():
 	try:
 		con= sqlite3.connect('test.db')
 		cur= con.cursor()
+<<<<<<< HEAD
                 choice=input("1:Add customer 2:add item 3:delete 4:modify item details item 5:view database contents`")
+=======
+                choice=input(" 1:Add customer \n 2:add item \n 3:delete \n 4:modify item details item \n 5:view database contents \n Enter the choice")
+>>>>>>> 0a23a8864f93a4b48e120aa9e7b3a52fbf18c3fa
 		if choice==1:
                 	toadd=input("Enter the no:of customers  to add")
                 	for i in range(0,toadd):
@@ -66,6 +70,7 @@ def main():
 				con.commit()
 				print Id,"deleted"
 				#print "ERROR!!!item not found cannot delete...\n"
+<<<<<<< HEAD
 		elif choice==5:
 			h="SELECT * FROM stock_details"
 	        	cur.execute(h)
@@ -76,6 +81,68 @@ def main():
 			for i in range(0,l):
              			print data[i][0],'\t',data[i][1],'\t''\t',data[i][2],'\t''\t',data[i][3],'\t''\t',data[i][4],'\t''\t',data[i][5],'\t''\t',data[i][6]
 				print "---------------------------------------------------------------------------------------------"
+=======
+		elif choice==4:
+			toadd=input("Enter no:of items to update/moify")
+			for i in range(0,toadd):
+				h="SELECT * FROM stock_details"
+	        		cur.execute(h)
+				data=cur.fetchall()
+				l=len(data)
+                		print "Item_id\tItem_name\tItem_price\tItem_quantity\tItem_tax\tPerishable\tExp_date"
+				print "==================================================================================================="
+				for i in range(0,l):
+             				print data[i][0],'\t',data[i][1],'\t''\t',data[i][2],'\t''\t',data[i][3],'\t''\t',data[i][4],'\t''\t',data[i][5],'\t''\t',data[i][6]
+					print "---------------------------------------------------------------------------------------------"
+				Id=raw_input("Enter the id of item")
+				ch=input("\n 1:modify price \n 2:modify tax \n 3:modify quantity \n Enter a choice (eg: 1,2..)  ")
+				if ch == 1:
+					price=input("Enter the value to be updated")
+					sql=("update stock_details set Item_price=? where Item_id=?")
+					cur.execute(sql,(price,Id))
+					con.commit()
+					print "price updated to",price
+				if ch == 2:
+					tax=input("Enter the tax to be updated  for the commodity ")
+					sql=("update stock_details set Item_tax=? where Item_id=?")	
+					cur.execute(sql,(tax,Id))
+					con.commit()
+					print "tax updated to",tax	
+				if ch ==3:
+					quantity=input("Enter the quantity to be updated the commodity ")
+					sql=("update stock_details set Item_quantity=? where Item_id=?")	
+					cur.execute(sql,(quantity,Id))
+					con.commit()
+					print "quantity updated to",quantity
+				else:
+					print "ERROR!!! Enter a valid choice"
+			
+		elif choice==5:
+			print "1:customer database\n2:stock database"
+			c=input("Enter the choice")
+			if c == 1:
+				n="SELECT * FROM customer"
+	        		cur.execute(n)
+				data=cur.fetchall()
+				l=len(data)
+                		print "customer_id\tcustomer_name\t\tcustomer_phone\t\tcustomer_bill no"
+				print "==================================================================================================="
+				for i in range(0,l):
+             				print data[i][0],'\t''\t',data[i][1],'    \t ''  \t',data[i][2],'  \t''  \t',data[i][3]
+					print "---------------------------------------------------------------------------------------------"
+			elif c == 2:
+				h="SELECT * FROM stock_details"
+	        		cur.execute(h)
+				data=cur.fetchall()
+				l=len(data)
+                		print "Item_id\tItem_name\tItem_price\tItem_quantity\tItem_tax\tPerishable\tExp_date"
+				print "==================================================================================================="
+				for i in range(0,l):
+             				print data[i][0],'\t',data[i][1],'\t''\t',data[i][2],'\t''\t',data[i][3],'\t''\t',data[i][4],'\t''\t',data[i][5],'\t''\t',data[i][6]
+					print "---------------------------------------------------------------------------------------------"
+			else:
+				print "ERROR!!!!! Invalid choice"
+>>>>>>> 0a23a8864f93a4b48e120aa9e7b3a52fbf18c3fa
 		
 	except sqlite3.Error,e:
 		if con:
